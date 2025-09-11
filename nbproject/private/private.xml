@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/crud/java/mvc/CRUDJAVAMVC.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Configuracion/MiConexion.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Models/ModelPersona.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Models/ModelRoles.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Vistas/JFramePersona.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Controllers/ControllerPersona.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Controllers/ControllerRoles.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Scripts/SQL_ScriptsCreacionTablas.sql</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Configuracion/ConexionLocal.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Interface/IGestorConexion.java</file>
+            <file>file:/D:/felipe.rodriguez/Formacion/Java/web_java/CRUD-JAVA-MVC/src/Interface/IGestorDatos.java</file>
+        </group>
+    </open-files>
+</project-private>
