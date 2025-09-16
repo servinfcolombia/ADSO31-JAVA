@@ -4,38 +4,6 @@
 git config --global user.name "Tu Nombre"
 git config --global user.email "tuemail@example.com"
 
-========================================================
-
-=== INSTRUCCIONES PARA COPIA DE SEGURIDAD EN GITHUB ===
-
-1. Abrir terminal en NetBeans (o Git Bash si prefieres)
-2. Asegúrate de estar en la carpeta del proyecto:
-   cd /cygdrive/c/ruta/a/tu/proyecto
-
-3. (SOLO LA PRIMERA VEZ) Conectar con el repositorio de GitHub:
-   git remote add origin https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-
-   ⚠️ Reemplaza "TU_USUARIO" y "TU_REPOSITORIO" con los datos reales.
-
-4. Verificar estado de archivos:
-   git status
-
-5. Agregar todos los cambios:
-   git add .
-
-6. Confirmar cambios (commit):
-   git commit -m "Actualización del proyecto - $(date)"
-
-7. Subir a GitHub (push):
-   git push origin main
-
-   ⚠️ Si tu rama se llama "master", usa:
-   git push origin master
-
-=== FIN DE INSTRUCCIONES ===
-
-Pasos para subir archivos a GitHub:
-
 1. Abre la terminal en la carpeta de tu proyecto.
 2. Inicializa el repositorio local:
    git init

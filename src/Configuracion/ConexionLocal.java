@@ -3,95 +3,47 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Configuracion;
-import Interface.IGestorConexion;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
- *
+ * Clase de conexión local a MySQL para el proyecto CRUD-JAVA-MVC
  * @author Felipe Rodriguez
  */
-public class ConexionLocal implements IGestorConexion{
-    
-    private String url = "jdbc:mysql://localhost/crud_java_mvc";
-    private String usuario = "root";
-    private String clave = "";
-    
-    //Instancia de la clase Connection del sistema
-    private Connection conexion;
-
-    public ConexionLocal() {
-    }
-    
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public Connection getConexion() {
-        return conexion;
-    }
-
-    public void setConexion(Connection conexion) {
-        this.conexion = conexion;
-    }
-
-    @Override
-    public void conectar() {
+public class ConexionLocal {
+    private static final String URL = "jdbc:mysql://localhost:3306/crud_java_mvc";
+    private static final String USUARIO = "root";
+    private static final String CLAVE = "";
+    /**
+     * Obtiene una conexión activa a la base de datos
+     * @return Connection o null si falla
+     */
+    public static Connection getConnection() {
+        Connection conexion = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conexion = DriverManager.getConnection(this.url, this.usuario, this.clave);
-            System.out.println("Conectado a la base de Datos Local");
+            conexion = DriverManager.getConnection(URL, USUARIO, CLAVE);
+            System.out.println("Conexión exitosa a la base de datos."); 
+            
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, "Error al conectar a la BD", ex);
         }
+        return conexion;
     }
-
-    @Override
-    public void desconectar() {
-        try {
-            conexion.close();
-            System.out.println("Desconectado de la base de datos local");
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public void testearConexion() {
-        try {
-            if(conexion != null && !conexion.isClosed()){
-                System.out.println("Conexion Abierta");
-            } else {
-                System.out.println("Conexion Cerrada");
+    /**
+     * Cierra la conexión de forma segura
+     * @param conexion objeto Connection a cerrar
+     */
+    public static void closeConnection(Connection conexion) {
+        if (conexion != null) {
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, "Error al cerrar conexión", ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-public class MiConexion {
+public class _MiConexion {
 
     private Connection cnn;
     private String cadenaConexion, usuarioDb, claveDb;
