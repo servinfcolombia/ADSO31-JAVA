@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerRoles {
-        public List<ModelRoles> ObtenerRoles() {
+    public List<ModelRoles> ObtenerRoles() {
         List<ModelRoles> lista = new ArrayList<>();
         String sql = "SELECT id, nombre FROM Roles ORDER BY id";
 
@@ -30,5 +30,21 @@ public class ControllerRoles {
         }
 
         return lista;
+    }
+        
+    public String obtenerNombrePorId(int id) {
+        String sql = "SELECT nombre FROM Roles WHERE id = ?";
+        try (Connection conn = ConexionLocal.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("nombre");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Desconocido";
     }
 }

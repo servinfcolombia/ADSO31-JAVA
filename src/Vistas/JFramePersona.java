@@ -5,6 +5,7 @@
 package Vistas;
 import Controllers.ControllerPersona;
 import Models.ModelPersona;
+import Controllers.ControllerRoles;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,6 +17,8 @@ public class JFramePersona extends javax.swing.JFrame {
         initComponents();
         //cargarRolesEnCombo();
         listarTabla();
+        jTextFieldId.setVisible(false); // ✅ Oculta el campo ID
+
         
         Controllers.ControllerRoles rolControl = new Controllers.ControllerRoles();
         List<Models.ModelRoles> listaRoles = rolControl.ObtenerRoles();
@@ -229,7 +232,7 @@ public class JFramePersona extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRegistrar)
                     .addComponent(jButtonEditar)
@@ -250,6 +253,11 @@ public class JFramePersona extends javax.swing.JFrame {
 
             }
         ));
+        jTablePersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePersonasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablePersonas);
 
         jTextFieldId.setText("jTextField1");
@@ -268,31 +276,31 @@ public class JFramePersona extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(525, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))))
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -501,8 +509,35 @@ public class JFramePersona extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTextFieldId.setVisible(false);
     }//GEN-LAST:event_jTextFieldIdActionPerformed
+
+    private void jTablePersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePersonasMouseClicked
+        // TODO add your handling code here:
+        int fila = jTablePersonas.getSelectedRow(); // ✅ DECLARAR PRIMERO
+        if (fila >= 0) {
+            // Obtener valores de la fila seleccionada
+            int id = (int) jTablePersonas.getValueAt(fila, 0);
+            String nombre = (String) jTablePersonas.getValueAt(fila, 1);
+            String apellidos = (String) jTablePersonas.getValueAt(fila, 2);
+            String correo = (String) jTablePersonas.getValueAt(fila, 3);
+            java.util.Date fecha = (java.util.Date) jTablePersonas.getValueAt(fila, 4);
+            String pais = (String) jTablePersonas.getValueAt(fila, 5);
+            String profesion = (String) jTablePersonas.getValueAt(fila, 6);
+            String rolNombre = (String) jTablePersonas.getValueAt(fila, 7);
+
+            // Cargar en el formulario
+            jTextFieldId.setText(String.valueOf(id));
+            jTextFieldNombre.setText(nombre);
+            jTextFieldApellidos.setText(apellidos);
+            jTextFieldCorreo.setText(correo);
+            jDateChooserFechaNacimiento.setDate(fecha);
+            jTextFieldPais.setText(pais);
+            jTextFieldProfesion.setText(profesion);
+            jComboBoxRol.setSelectedItem(rolNombre); // Selecciona por nombre;
+        }
+    }//GEN-LAST:event_jTablePersonasMouseClicked
     
     private void limpiarCampos() {
+        jTextFieldId.setText("");
         jTextFieldNombre.setText("");
         jTextFieldApellidos.setText("");
         jTextFieldCorreo.setText("");
@@ -519,7 +554,7 @@ public class JFramePersona extends javax.swing.JFrame {
 
         String[] columnas = {
             "ID", "Nombres", "Apellidos", "Correo", 
-            "Fecha de Nacimiento", "Pais", "Profesion"
+            "Fecha de Nacimiento", "Pais", "Profesion", "Rol"
         };
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         jTablePersonas.setModel(modelo);
@@ -534,31 +569,8 @@ public class JFramePersona extends javax.swing.JFrame {
                 p.getFechaNacimiento(),
                 p.getPais(),
                 p.getProfesion(),
-                p.getRol_id()
+                new ControllerRoles().obtenerNombrePorId(p.getRol_id())
             });
-        }
-    }
-    
-    private void jTablePersonasMouseClicked(java.awt.event.MouseEvent evt) {
-        int fila = jTablePersonas.getSelectedRow();
-        if (fila >= 0) {
-            // Obtener valores de la fila seleccionada
-            int id = (int) jTablePersonas.getValueAt(fila, 0);
-            String nombre = (String) jTablePersonas.getValueAt(fila, 1);
-            String apellidos = (String) jTablePersonas.getValueAt(fila, 2);
-            String correo = (String) jTablePersonas.getValueAt(fila, 3);
-            java.util.Date fecha = (java.util.Date) jTablePersonas.getValueAt(fila, 4);
-            String profesion = (String) jTablePersonas.getValueAt(fila, 5);
-            int rolId = (int) jTablePersonas.getValueAt(fila, 6);
-
-            // Cargar en el formulario
-            jTextFieldId.setText(String.valueOf(id));
-            jTextFieldNombre.setText(nombre);
-            jTextFieldApellidos.setText(apellidos);
-            jTextFieldCorreo.setText(correo);
-            jDateChooserFechaNacimiento.setDate(fecha);
-            jTextFieldProfesion.setText(profesion);
-            jComboBoxRol.setSelectedIndex(rolId - 1);
         }
     }
     /**
